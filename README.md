@@ -1,7 +1,6 @@
-`react-router` is the primary package in the React Router project.
+This package simply re-exports everything from `react-router` to smooth the upgrade path for v6 applications. Once upgraded you can change all of your imports and remove it from your dependencies:
 
-## Installation
-
-```sh
-npm i react-router
+```diff
+-import { Routes } from "react-router-dom"
++import { Routes } from "react-router"
 ```
