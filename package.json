@@ -1,47 +1,26 @@
 {
-  "name": "cookie",
-  "version": "1.1.1",
-  "description": "HTTP server cookie parsing and serialization",
+  "name": "mini-svg-data-uri",
+  "version": "1.4.4",
+  "description": "Small, efficient encoding of SVG data URIs for CSS, HTML, etc.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "bin": "cli.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigt/mini-svg-data-uri.git"
+  },
   "keywords": [
-    "cookie",
-    "cookies"
+    "svg",
+    "url",
+    "data",
+    "uri",
+    "minification",
+    "url encoding"
   ],
-  "repository": "jshttp/cookie",
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/express"
-  },
+  "author": "Taylor “Tigt” Hunt <holla@ti.gt> (https://ti.gt/)",
   "license": "MIT",
-  "author": "Roman Shtylman <shtylman@gmail.com>",
-  "contributors": [
-    "Douglas Christopher Wilson <doug@somethingdoug.com>"
-  ],
-  "sideEffects": false,
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "scripts": {
-    "bench": "vitest bench",
-    "build": "ts-scripts build",
-    "format": "ts-scripts format",
-    "prepare": "ts-scripts install",
-    "prepublishOnly": "npm run build",
-    "specs": "ts-scripts specs",
-    "test": "ts-scripts test"
+  "bugs": {
+    "url": "https://github.com/tigt/mini-svg-data-uri/issues"
   },
-  "devDependencies": {
-    "@borderless/ts-scripts": "^0.15.0",
-    "@vitest/coverage-v8": "^3.2.4",
-    "top-sites": "1.1.194",
-    "typescript": "^5.6.2",
-    "vitest": "^3.2.4"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "ts-scripts": {
-    "project": "tsconfig.build.json"
-  }
+  "homepage": "https://github.com/tigt/mini-svg-data-uri#readme"
 }
