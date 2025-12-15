@@ -1,4 +1,4 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }/**
+/**
  * react-router v7.10.1
  *
  * Copyright (c) Remix Software Inc.
@@ -8,147 +8,51 @@
  *
  * @license MIT
  */
-"use client";
-
-
-
-
-
-var _chunkFKYGG5Z2js = require('./chunk-FKYGG5Z2.js');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _chunkHMTWJNYBjs = require('./chunk-HMTWJNYB.js');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var _chunkRBZI3ZHDjs = require('./chunk-RBZI3ZHD.js');
+import {
+  ENABLE_DEV_WARNINGS,
+  ErrorResponseImpl,
+  FrameworkContext,
+  NO_BODY_STATUS_CODES,
+  Outlet,
+  RSCRouterContext,
+  RemixErrorBoundary,
+  RouterContextProvider,
+  RouterProvider,
+  SINGLE_FETCH_REDIRECT_STATUS,
+  SingleFetchRedirectSymbol,
+  StaticRouterProvider,
+  StreamTransfer,
+  convertRoutesToDataRoutes,
+  createMemoryRouter,
+  createServerRoutes,
+  createStaticHandler,
+  createStaticRouter,
+  decodeViaTurboStream,
+  encode,
+  escapeHtml,
+  getManifestPath,
+  getStaticContextFromError,
+  instrumentHandler,
+  isDataWithResponseInit,
+  isRedirectResponse,
+  isRedirectStatusCode,
+  isResponse,
+  isRouteErrorResponse,
+  matchRoutes,
+  redirect,
+  redirectDocument,
+  replace,
+  shouldHydrateRouteLoader,
+  stripBasename,
+  useRouteError,
+  warnOnce,
+  withComponentProps,
+  withErrorBoundaryProps,
+  withHydrateFallbackProps
+} from "./chunk-WWGJGFF6.mjs";
 
 // lib/dom/ssr/server.tsx
-var _react = require('react'); var React = _interopRequireWildcard(_react); var React2 = _interopRequireWildcard(_react); var React3 = _interopRequireWildcard(_react);
+import * as React from "react";
 function ServerRouter({
   context,
   url,
@@ -158,7 +62,7 @@ function ServerRouter({
     url = new URL(url);
   }
   let { manifest, routeModules, criticalCss, serverHandoffString } = context;
-  let routes = _chunkRBZI3ZHDjs.createServerRoutes.call(void 0, 
+  let routes = createServerRoutes(
     manifest.routes,
     routeModules,
     context.future,
@@ -171,7 +75,7 @@ function ServerRouter({
     let routeId = match.route.id;
     let route = routeModules[routeId];
     let manifestRoute = context.manifest.routes[routeId];
-    if (route && manifestRoute && _chunkRBZI3ZHDjs.shouldHydrateRouteLoader.call(void 0, 
+    if (route && manifestRoute && shouldHydrateRouteLoader(
       routeId,
       route.clientLoader,
       manifestRoute.hasLoader,
@@ -180,9 +84,9 @@ function ServerRouter({
       delete context.staticHandlerContext.loaderData[routeId];
     }
   }
-  let router = _chunkHMTWJNYBjs.createStaticRouter.call(void 0, routes, context.staticHandlerContext);
+  let router = createStaticRouter(routes, context.staticHandlerContext);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(
-    _chunkRBZI3ZHDjs.FrameworkContext.Provider,
+    FrameworkContext.Provider,
     {
       value: {
         manifest,
@@ -197,8 +101,8 @@ function ServerRouter({
         renderMeta: context.renderMeta
       }
     },
-    /* @__PURE__ */ React.createElement(_chunkRBZI3ZHDjs.RemixErrorBoundary, { location: router.state.location }, /* @__PURE__ */ React.createElement(
-      _chunkHMTWJNYBjs.StaticRouterProvider,
+    /* @__PURE__ */ React.createElement(RemixErrorBoundary, { location: router.state.location }, /* @__PURE__ */ React.createElement(
+      StaticRouterProvider,
       {
         router,
         context: context.staticHandlerContext,
@@ -206,7 +110,7 @@ function ServerRouter({
       }
     ))
   ), context.serverHandoffStream ? /* @__PURE__ */ React.createElement(React.Suspense, null, /* @__PURE__ */ React.createElement(
-    _chunkRBZI3ZHDjs.StreamTransfer,
+    StreamTransfer,
     {
       context,
       identifier: 0,
@@ -218,7 +122,7 @@ function ServerRouter({
 }
 
 // lib/dom/ssr/routes-test-stub.tsx
-
+import * as React2 from "react";
 function createRoutesStub(routes, _context) {
   return function RoutesTestStub({
     initialEntries,
@@ -231,8 +135,8 @@ function createRoutesStub(routes, _context) {
     if (routerRef.current == null) {
       frameworkContextRef.current = {
         future: {
-          unstable_subResourceIntegrity: _optionalChain([future, 'optionalAccess', _2 => _2.unstable_subResourceIntegrity]) === true,
-          v8_middleware: _optionalChain([future, 'optionalAccess', _3 => _3.v8_middleware]) === true
+          unstable_subResourceIntegrity: future?.unstable_subResourceIntegrity === true,
+          v8_middleware: future?.v8_middleware === true
         },
         manifest: {
           routes: {},
@@ -248,18 +152,18 @@ function createRoutesStub(routes, _context) {
       let patched = processRoutes(
         // @ts-expect-error `StubRouteObject` is stricter about `loader`/`action`
         // types compared to `AgnosticRouteObject`
-        _chunkRBZI3ZHDjs.convertRoutesToDataRoutes.call(void 0, routes, (r) => r),
-        _context !== void 0 ? _context : _optionalChain([future, 'optionalAccess', _4 => _4.v8_middleware]) ? new (0, _chunkRBZI3ZHDjs.RouterContextProvider)() : {},
+        convertRoutesToDataRoutes(routes, (r) => r),
+        _context !== void 0 ? _context : future?.v8_middleware ? new RouterContextProvider() : {},
         frameworkContextRef.current.manifest,
         frameworkContextRef.current.routeModules
       );
-      routerRef.current = _chunkRBZI3ZHDjs.createMemoryRouter.call(void 0, patched, {
+      routerRef.current = createMemoryRouter(patched, {
         initialEntries,
         initialIndex,
         hydrationData
       });
     }
-    return /* @__PURE__ */ React2.createElement(_chunkRBZI3ZHDjs.FrameworkContext.Provider, { value: frameworkContextRef.current }, /* @__PURE__ */ React2.createElement(_chunkRBZI3ZHDjs.RouterProvider, { router: routerRef.current }));
+    return /* @__PURE__ */ React2.createElement(FrameworkContext.Provider, { value: frameworkContextRef.current }, /* @__PURE__ */ React2.createElement(RouterProvider, { router: routerRef.current }));
   };
 }
 function processRoutes(routes, context, manifest, routeModules, parentId) {
@@ -273,9 +177,9 @@ function processRoutes(routes, context, manifest, routeModules, parentId) {
       id: route.id,
       path: route.path,
       index: route.index,
-      Component: route.Component ? _chunkRBZI3ZHDjs.withComponentProps.call(void 0, route.Component) : void 0,
-      HydrateFallback: route.HydrateFallback ? _chunkRBZI3ZHDjs.withHydrateFallbackProps.call(void 0, route.HydrateFallback) : void 0,
-      ErrorBoundary: route.ErrorBoundary ? _chunkRBZI3ZHDjs.withErrorBoundaryProps.call(void 0, route.ErrorBoundary) : void 0,
+      Component: route.Component ? withComponentProps(route.Component) : void 0,
+      HydrateFallback: route.HydrateFallback ? withHydrateFallbackProps(route.HydrateFallback) : void 0,
+      ErrorBoundary: route.ErrorBoundary ? withErrorBoundaryProps(route.ErrorBoundary) : void 0,
       action: route.action ? (args) => route.action({ ...args, context }) : void 0,
       loader: route.loader ? (args) => route.loader({ ...args, context }) : void 0,
       middleware: route.middleware ? route.middleware.map(
@@ -310,7 +214,7 @@ function processRoutes(routes, context, manifest, routeModules, parentId) {
     };
     manifest.routes[newRoute.id] = entryRoute;
     routeModules[route.id] = {
-      default: newRoute.Component || _chunkRBZI3ZHDjs.Outlet,
+      default: newRoute.Component || Outlet,
       ErrorBoundary: newRoute.ErrorBoundary || void 0,
       handle: route.handle,
       links: route.links,
@@ -331,7 +235,7 @@ function processRoutes(routes, context, manifest, routeModules, parentId) {
 }
 
 // lib/server-runtime/cookies.ts
-var _cookie = require('cookie');
+import { parse, serialize } from "cookie";
 
 // lib/server-runtime/crypto.ts
 var encoder = /* @__PURE__ */ new TextEncoder();
@@ -394,7 +298,7 @@ var createCookie = (name, cookieOptions = {}) => {
     },
     async parse(cookieHeader, parseOptions) {
       if (!cookieHeader) return null;
-      let cookies = _cookie.parse.call(void 0, cookieHeader, { ...options, ...parseOptions });
+      let cookies = parse(cookieHeader, { ...options, ...parseOptions });
       if (name in cookies) {
         let value = cookies[name];
         if (typeof value === "string" && value !== "") {
@@ -408,7 +312,7 @@ var createCookie = (name, cookieOptions = {}) => {
       }
     },
     async serialize(value, serializeOptions) {
-      return _cookie.serialize.call(void 0, 
+      return serialize(
         name,
         value === "" ? "" : await encodeCookieValue(value, secrets),
         {
@@ -505,7 +409,7 @@ function myUnescape(value) {
   return result;
 }
 function warnOnceAboutExpiresCookie(name, expires) {
-  _chunkRBZI3ZHDjs.warnOnce.call(void 0, 
+  warnOnce(
     !expires,
     `The "${name}" cookie has an "expires" property set. This will cause the expires value to not be updated when the session is committed. Instead, you should set the expires value when serializing the cookie. You can use \`commitSession(session, { expires })\` if using a session storage object, or \`cookie.serialize("value", { expires })\` if you're using the cookie directly.`
   );
@@ -559,7 +463,7 @@ function serializeErrors(errors, serverMode) {
   let entries = Object.entries(errors);
   let serialized = {};
   for (let [key, val] of entries) {
-    if (_chunkRBZI3ZHDjs.isRouteErrorResponse.call(void 0, val)) {
+    if (isRouteErrorResponse(val)) {
       serialized[key] = { ...val, __type: "RouteErrorResponse" };
     } else if (val instanceof Error) {
       let sanitized = sanitizeError(val, serverMode);
@@ -584,7 +488,7 @@ function serializeErrors(errors, serverMode) {
 
 // lib/server-runtime/routeMatching.ts
 function matchServerRoutes(routes, pathname, basename) {
-  let matches = _chunkRBZI3ZHDjs.matchRoutes.call(void 0, 
+  let matches = matchRoutes(
     routes,
     pathname,
     basename
@@ -605,7 +509,7 @@ async function callRouteHandler(handler, args) {
     context: args.context,
     unstable_pattern: args.unstable_pattern
   });
-  if (_chunkRBZI3ZHDjs.isDataWithResponseInit.call(void 0, result) && result.init && result.init.status && _chunkRBZI3ZHDjs.isRedirectStatusCode.call(void 0, result.init.status)) {
+  if (isDataWithResponseInit(result) && result.init && result.init.status && isRedirectStatusCode(result.init.status)) {
     throw new Response(null, result.init);
   }
   return result;
@@ -650,7 +554,7 @@ function stripRoutesParam(request) {
 }
 
 // lib/server-runtime/invariant.ts
-function invariant2(value, message) {
+function invariant(value, message) {
   if (value === false || value === null || typeof value === "undefined") {
     console.error(
       "The following error is a bug in React Router; please open an issue! https://github.com/remix-run/react-router/issues/new/choose"
@@ -670,7 +574,7 @@ function getDevServerHooks() {
 function getBuildTimeHeader(request, headerName) {
   if (typeof process !== "undefined") {
     try {
-      if (_optionalChain([process, 'access', _5 => _5.env, 'optionalAccess', _6 => _6.IS_RR_BUILD_REQUEST]) === "yes") {
+      if (process.env?.IS_RR_BUILD_REQUEST === "yes") {
         return request.headers.get(headerName);
       }
     } catch (e) {
@@ -716,7 +620,7 @@ function createStaticHandlerDataRoutes(manifest, future, parentId = "", routesBy
         );
         if (preRenderedData != null) {
           let encoded = preRenderedData ? decodeURI(preRenderedData) : preRenderedData;
-          invariant2(encoded, "Missing prerendered data for route");
+          invariant(encoded, "Missing prerendered data for route");
           let uint8array = new TextEncoder().encode(encoded);
           let stream = new ReadableStream({
             start(controller) {
@@ -724,25 +628,25 @@ function createStaticHandlerDataRoutes(manifest, future, parentId = "", routesBy
               controller.close();
             }
           });
-          let decoded = await _chunkRBZI3ZHDjs.decodeViaTurboStream.call(void 0, stream, global);
+          let decoded = await decodeViaTurboStream(stream, global);
           let data2 = decoded.value;
-          if (data2 && _chunkRBZI3ZHDjs.SingleFetchRedirectSymbol in data2) {
-            let result = data2[_chunkRBZI3ZHDjs.SingleFetchRedirectSymbol];
+          if (data2 && SingleFetchRedirectSymbol in data2) {
+            let result = data2[SingleFetchRedirectSymbol];
             let init = { status: result.status };
             if (result.reload) {
-              throw _chunkRBZI3ZHDjs.redirectDocument.call(void 0, result.redirect, init);
+              throw redirectDocument(result.redirect, init);
             } else if (result.replace) {
-              throw _chunkRBZI3ZHDjs.replace.call(void 0, result.redirect, init);
+              throw replace(result.redirect, init);
             } else {
-              throw _chunkRBZI3ZHDjs.redirect.call(void 0, result.redirect, init);
+              throw redirect(result.redirect, init);
             }
           } else {
-            invariant2(
+            invariant(
               data2 && route.id in data2,
               "Unable to decode prerendered data"
             );
             let result = data2[route.id];
-            invariant2(
+            invariant(
               "data" in result,
               "Unable to process prerendered data"
             );
@@ -773,15 +677,15 @@ function createStaticHandlerDataRoutes(manifest, future, parentId = "", routesBy
 
 // lib/server-runtime/serverHandoff.ts
 function createServerHandoffString(serverHandoff) {
-  return _chunkRBZI3ZHDjs.escapeHtml.call(void 0, JSON.stringify(serverHandoff));
+  return escapeHtml(JSON.stringify(serverHandoff));
 }
 
 // lib/server-runtime/headers.ts
-var _setcookieparser = require('set-cookie-parser');
+import { splitCookiesString } from "set-cookie-parser";
 function getDocumentHeaders(context, build) {
   return getDocumentHeadersImpl(context, (m) => {
     let route = build.routes[m.route.id];
-    invariant2(route, `Route with id "${m.route.id}" not found in build`);
+    invariant(route, `Route with id "${m.route.id}" not found in build`);
     return route.module.headers;
   });
 }
@@ -838,7 +742,7 @@ function getDocumentHeadersImpl(context, getRouteHeadersFn, _defaultHeaders) {
 function prependCookies(parentHeaders, childHeaders) {
   let parentSetCookieString = parentHeaders.get("Set-Cookie");
   if (parentSetCookieString) {
-    let cookies = _setcookieparser.splitCookiesString.call(void 0, parentSetCookieString);
+    let cookies = splitCookiesString(parentSetCookieString);
     let childCookies = new Set(childHeaders.getSetCookie());
     cookies.forEach((cookie) => {
       if (!childCookies.has(cookie)) {
@@ -850,7 +754,7 @@ function prependCookies(parentHeaders, childHeaders) {
 
 // lib/server-runtime/single-fetch.ts
 var SERVER_NO_BODY_STATUS_CODES = /* @__PURE__ */ new Set([
-  ..._chunkRBZI3ZHDjs.NO_BODY_STATUS_CODES,
+  ...NO_BODY_STATUS_CODES,
   304
 ]);
 async function singleFetchAction(build, serverMode, staticHandler, request, handlerUrl, loadContext, handleError) {
@@ -880,7 +784,7 @@ async function singleFetchAction(build, serverMode, staticHandler, request, hand
     return handleQueryError(error);
   }
   function handleQueryResult(result) {
-    return _chunkRBZI3ZHDjs.isResponse.call(void 0, result) ? result : staticContextToResponse(result);
+    return isResponse(result) ? result : staticContextToResponse(result);
   }
   function handleQueryError(error) {
     handleError(error);
@@ -892,12 +796,12 @@ async function singleFetchAction(build, serverMode, staticHandler, request, hand
   }
   function staticContextToResponse(context) {
     let headers = getDocumentHeaders(context, build);
-    if (_chunkRBZI3ZHDjs.isRedirectStatusCode.call(void 0, context.statusCode) && headers.has("Location")) {
+    if (isRedirectStatusCode(context.statusCode) && headers.has("Location")) {
       return new Response(null, { status: context.statusCode, headers });
     }
     if (context.errors) {
       Object.values(context.errors).forEach((err) => {
-        if (!_chunkRBZI3ZHDjs.isRouteErrorResponse.call(void 0, err) || err.error) {
+        if (!isRouteErrorResponse(err) || err.error) {
           handleError(err);
         }
       });
@@ -944,7 +848,7 @@ async function singleFetchLoaders(build, serverMode, staticHandler, request, han
     return handleQueryError(error);
   }
   function handleQueryResult(result) {
-    return _chunkRBZI3ZHDjs.isResponse.call(void 0, result) ? result : staticContextToResponse(result);
+    return isResponse(result) ? result : staticContextToResponse(result);
   }
   function handleQueryError(error) {
     handleError(error);
@@ -956,12 +860,12 @@ async function singleFetchLoaders(build, serverMode, staticHandler, request, han
   }
   function staticContextToResponse(context) {
     let headers = getDocumentHeaders(context, build);
-    if (_chunkRBZI3ZHDjs.isRedirectStatusCode.call(void 0, context.statusCode) && headers.has("Location")) {
+    if (isRedirectStatusCode(context.statusCode) && headers.has("Location")) {
       return new Response(null, { status: context.statusCode, headers });
     }
     if (context.errors) {
       Object.values(context.errors).forEach((err) => {
-        if (!_chunkRBZI3ZHDjs.isRouteErrorResponse.call(void 0, err) || err.error) {
+        if (!isRouteErrorResponse(err) || err.error) {
           handleError(err);
         }
       });
@@ -1025,15 +929,15 @@ function generateSingleFetchRedirectResponse(redirectResponse, request, build, s
   headers.delete("Location");
   headers.set("Content-Type", "text/x-script");
   return generateSingleFetchResponse(request, build, serverMode, {
-    result: request.method === "GET" ? { [_chunkRBZI3ZHDjs.SingleFetchRedirectSymbol]: redirect2 } : redirect2,
+    result: request.method === "GET" ? { [SingleFetchRedirectSymbol]: redirect2 } : redirect2,
     headers,
-    status: _chunkRBZI3ZHDjs.SINGLE_FETCH_REDIRECT_STATUS
+    status: SINGLE_FETCH_REDIRECT_STATUS
   });
 }
 function getSingleFetchRedirect(status, headers, basename) {
   let redirect2 = headers.get("Location");
   if (basename) {
-    redirect2 = _chunkRBZI3ZHDjs.stripBasename.call(void 0, redirect2, basename) || redirect2;
+    redirect2 = stripBasename(redirect2, basename) || redirect2;
   }
   return {
     redirect: redirect2,
@@ -1059,7 +963,7 @@ function encodeViaTurboStream(data2, requestSignal, streamTimeout, serverMode) {
     typeof streamTimeout === "number" ? streamTimeout : 4950
   );
   requestSignal.addEventListener("abort", () => clearTimeout(timeoutId));
-  return _chunkRBZI3ZHDjs.encode.call(void 0, data2, {
+  return encode(data2, {
     signal: controller.signal,
     plugins: [
       (value) => {
@@ -1067,12 +971,12 @@ function encodeViaTurboStream(data2, requestSignal, streamTimeout, serverMode) {
           let { name, message, stack } = serverMode === "production" /* Production */ ? sanitizeError(value, serverMode) : value;
           return ["SanitizedError", name, message, stack];
         }
-        if (value instanceof _chunkRBZI3ZHDjs.ErrorResponseImpl) {
+        if (value instanceof ErrorResponseImpl) {
           let { data: data3, status, statusText } = value;
           return ["ErrorResponse", data3, status, statusText];
         }
-        if (value && typeof value === "object" && _chunkRBZI3ZHDjs.SingleFetchRedirectSymbol in value) {
-          return ["SingleFetchRedirect", value[_chunkRBZI3ZHDjs.SingleFetchRedirectSymbol]];
+        if (value && typeof value === "object" && SingleFetchRedirectSymbol in value) {
+          return ["SingleFetchRedirect", value[SingleFetchRedirectSymbol]];
         }
       }
     ],
@@ -1095,7 +999,7 @@ function derive(build, mode) {
   let routes = createRoutes(build.routes);
   let dataRoutes = createStaticHandlerDataRoutes(build.routes, build.future);
   let serverMode = isServerMode(mode) ? mode : "production" /* Production */;
-  let staticHandler = _chunkRBZI3ZHDjs.createStaticHandler.call(void 0, dataRoutes, {
+  let staticHandler = createStaticHandler(dataRoutes, {
     basename: build.basename,
     unstable_instrumentations: build.entry.module.unstable_instrumentations
   });
@@ -1103,7 +1007,7 @@ function derive(build, mode) {
     if (serverMode !== "test" /* Test */ && !request.signal.aborted) {
       console.error(
         // @ts-expect-error This is "private" from users but intended for internal use
-        _chunkRBZI3ZHDjs.isRouteErrorResponse.call(void 0, error) && error.error ? error.error : error
+        isRouteErrorResponse(error) && error.error ? error.error : error
       );
     }
   });
@@ -1112,7 +1016,7 @@ function derive(build, mode) {
     let loadContext;
     let handleError = (error) => {
       if (mode === "development" /* Development */) {
-        _optionalChain([getDevServerHooks, 'call', _7 => _7(), 'optionalAccess', _8 => _8.processRequestError, 'optionalCall', _9 => _9(error)]);
+        getDevServerHooks()?.processRequestError?.(error);
       }
       errorHandler(error, {
         context: loadContext,
@@ -1121,36 +1025,36 @@ function derive(build, mode) {
       });
     };
     if (build.future.v8_middleware) {
-      if (initialContext && !(initialContext instanceof _chunkRBZI3ZHDjs.RouterContextProvider)) {
+      if (initialContext && !(initialContext instanceof RouterContextProvider)) {
         let error = new Error(
           "Invalid `context` value provided to `handleRequest`. When middleware is enabled you must return an instance of `RouterContextProvider` from your `getLoadContext` function."
         );
         handleError(error);
         return returnLastResortErrorResponse(error, serverMode);
       }
-      loadContext = initialContext || new (0, _chunkRBZI3ZHDjs.RouterContextProvider)();
+      loadContext = initialContext || new RouterContextProvider();
     } else {
       loadContext = initialContext || {};
     }
     let url = new URL(request.url);
     let normalizedBasename = build.basename || "/";
     let normalizedPath = url.pathname;
-    if (_chunkRBZI3ZHDjs.stripBasename.call(void 0, normalizedPath, normalizedBasename) === "/_root.data") {
+    if (stripBasename(normalizedPath, normalizedBasename) === "/_root.data") {
       normalizedPath = normalizedBasename;
     } else if (normalizedPath.endsWith(".data")) {
       normalizedPath = normalizedPath.replace(/\.data$/, "");
     }
-    if (_chunkRBZI3ZHDjs.stripBasename.call(void 0, normalizedPath, normalizedBasename) !== "/" && normalizedPath.endsWith("/")) {
+    if (stripBasename(normalizedPath, normalizedBasename) !== "/" && normalizedPath.endsWith("/")) {
       normalizedPath = normalizedPath.slice(0, -1);
     }
     let isSpaMode = getBuildTimeHeader(request, "X-React-Router-SPA-Mode") === "yes";
     if (!build.ssr) {
       let decodedPath = decodeURI(normalizedPath);
       if (normalizedBasename !== "/") {
-        let strippedPath = _chunkRBZI3ZHDjs.stripBasename.call(void 0, decodedPath, normalizedBasename);
+        let strippedPath = stripBasename(decodedPath, normalizedBasename);
         if (strippedPath == null) {
           errorHandler(
-            new (0, _chunkRBZI3ZHDjs.ErrorResponseImpl)(
+            new ErrorResponseImpl(
               404,
               "Not Found",
               `Refusing to prerender the \`${decodedPath}\` path because it does not start with the basename \`${normalizedBasename}\``
@@ -1173,7 +1077,7 @@ function derive(build, mode) {
       } else if (!build.prerender.includes(decodedPath) && !build.prerender.includes(decodedPath + "/")) {
         if (url.pathname.endsWith(".data")) {
           errorHandler(
-            new (0, _chunkRBZI3ZHDjs.ErrorResponseImpl)(
+            new ErrorResponseImpl(
               404,
               "Not Found",
               `Refusing to SSR the path \`${decodedPath}\` because \`ssr:false\` is set and the path is not included in the \`prerender\` config, so in production the path will be a 404.`
@@ -1193,7 +1097,7 @@ function derive(build, mode) {
         }
       }
     }
-    let manifestUrl = _chunkRBZI3ZHDjs.getManifestPath.call(void 0, 
+    let manifestUrl = getManifestPath(
       build.routeDiscovery.manifestPath,
       normalizedBasename
     );
@@ -1228,7 +1132,7 @@ function derive(build, mode) {
         loadContext,
         handleError
       );
-      if (_chunkRBZI3ZHDjs.isRedirectResponse.call(void 0, response)) {
+      if (isRedirectResponse(response)) {
         response = generateSingleFetchRedirectResponse(
           response,
           request,
@@ -1242,7 +1146,7 @@ function derive(build, mode) {
           params: singleFetchMatches ? singleFetchMatches[0].params : {},
           request
         });
-        if (_chunkRBZI3ZHDjs.isRedirectResponse.call(void 0, response)) {
+        if (isRedirectResponse(response)) {
           response = generateSingleFetchRedirectResponse(
             response,
             request,
@@ -1266,8 +1170,8 @@ function derive(build, mode) {
       let criticalCss = void 0;
       if (build.unstable_getCriticalCss) {
         criticalCss = await build.unstable_getCriticalCss({ pathname });
-      } else if (mode === "development" /* Development */ && _optionalChain([getDevServerHooks, 'call', _10 => _10(), 'optionalAccess', _11 => _11.getCriticalCss])) {
-        criticalCss = await _optionalChain([getDevServerHooks, 'call', _12 => _12(), 'optionalAccess', _13 => _13.getCriticalCss, 'optionalCall', _14 => _14(pathname)]);
+      } else if (mode === "development" /* Development */ && getDevServerHooks()?.getCriticalCss) {
+        criticalCss = await getDevServerHooks()?.getCriticalCss?.(pathname);
       }
       response = await handleDocumentRequest(
         serverMode,
@@ -1290,7 +1194,7 @@ function derive(build, mode) {
     return response;
   };
   if (build.entry.module.unstable_instrumentations) {
-    requestHandler = _chunkRBZI3ZHDjs.instrumentHandler.call(void 0, 
+    requestHandler = instrumentHandler(
       requestHandler,
       build.entry.module.unstable_instrumentations.map((i) => i.handler).filter(Boolean)
     );
@@ -1402,7 +1306,7 @@ async function handleDocumentRequest(serverMode, build, staticHandler, request, 
       generateMiddlewareResponse: build.future.v8_middleware ? async (query) => {
         try {
           let innerResult = await query(request);
-          if (!_chunkRBZI3ZHDjs.isResponse.call(void 0, innerResult)) {
+          if (!isResponse(innerResult)) {
             innerResult = await renderHtml(innerResult, isSpaMode);
           }
           return innerResult;
@@ -1412,7 +1316,7 @@ async function handleDocumentRequest(serverMode, build, staticHandler, request, 
         }
       } : void 0
     });
-    if (!_chunkRBZI3ZHDjs.isResponse.call(void 0, result)) {
+    if (!isResponse(result)) {
       result = await renderHtml(result, isSpaMode);
     }
     return result;
@@ -1427,7 +1331,7 @@ async function handleDocumentRequest(serverMode, build, staticHandler, request, 
     }
     if (context.errors) {
       Object.values(context.errors).forEach((err) => {
-        if (!_chunkRBZI3ZHDjs.isRouteErrorResponse.call(void 0, err) || err.error) {
+        if (!isRouteErrorResponse(err) || err.error) {
           handleError(err);
         }
       });
@@ -1479,10 +1383,10 @@ async function handleDocumentRequest(serverMode, build, staticHandler, request, 
     } catch (error) {
       handleError(error);
       let errorForSecondRender = error;
-      if (_chunkRBZI3ZHDjs.isResponse.call(void 0, error)) {
+      if (isResponse(error)) {
         try {
           let data2 = await unwrapResponse(error);
-          errorForSecondRender = new (0, _chunkRBZI3ZHDjs.ErrorResponseImpl)(
+          errorForSecondRender = new ErrorResponseImpl(
             error.status,
             error.statusText,
             data2
@@ -1490,7 +1394,7 @@ async function handleDocumentRequest(serverMode, build, staticHandler, request, 
         } catch (e) {
         }
       }
-      context = _chunkRBZI3ZHDjs.getStaticContextFromError.call(void 0, 
+      context = getStaticContextFromError(
         staticHandler.dataRoutes,
         context,
         errorForSecondRender
@@ -1549,7 +1453,7 @@ async function handleResourceRequest(serverMode, build, staticHandler, routeId, 
     return handleQueryRouteError(error);
   }
   function handleQueryRouteResult(result) {
-    if (_chunkRBZI3ZHDjs.isResponse.call(void 0, result)) {
+    if (isResponse(result)) {
       return result;
     }
     if (typeof result === "string") {
@@ -1558,10 +1462,10 @@ async function handleResourceRequest(serverMode, build, staticHandler, routeId, 
     return Response.json(result);
   }
   function handleQueryRouteError(error) {
-    if (_chunkRBZI3ZHDjs.isResponse.call(void 0, error)) {
+    if (isResponse(error)) {
       return error;
     }
-    if (_chunkRBZI3ZHDjs.isRouteErrorResponse.call(void 0, error)) {
+    if (isRouteErrorResponse(error)) {
       handleError(error);
       return errorResponseToJson(error, serverMode);
     }
@@ -1655,7 +1559,7 @@ function createSessionStorage({
   updateData,
   deleteData
 }) {
-  let cookie = isCookie(cookieArg) ? cookieArg : createCookie(_optionalChain([cookieArg, 'optionalAccess', _15 => _15.name]) || "__session", cookieArg);
+  let cookie = isCookie(cookieArg) ? cookieArg : createCookie(cookieArg?.name || "__session", cookieArg);
   warnOnceAboutSigningSessionCookie(cookie);
   return {
     async getSession(cookieHeader, options) {
@@ -1665,7 +1569,7 @@ function createSessionStorage({
     },
     async commitSession(session, options) {
       let { id, data: data2 } = session;
-      let expires = _optionalChain([options, 'optionalAccess', _16 => _16.maxAge]) != null ? new Date(Date.now() + options.maxAge * 1e3) : _optionalChain([options, 'optionalAccess', _17 => _17.expires]) != null ? options.expires : cookie.expires;
+      let expires = options?.maxAge != null ? new Date(Date.now() + options.maxAge * 1e3) : options?.expires != null ? options.expires : cookie.expires;
       if (id) {
         await updateData(id, data2, expires);
       } else {
@@ -1684,7 +1588,7 @@ function createSessionStorage({
   };
 }
 function warnOnceAboutSigningSessionCookie(cookie) {
-  _chunkRBZI3ZHDjs.warnOnce.call(void 0, 
+  warnOnce(
     cookie.isSigned,
     `The "${cookie.name}" cookie is not signed, but session cookies should be signed to prevent tampering on the client before they are sent back to the server. See https://reactrouter.com/explanation/sessions-and-cookies#signing-cookies for more information.`
   );
@@ -1692,7 +1596,7 @@ function warnOnceAboutSigningSessionCookie(cookie) {
 
 // lib/server-runtime/sessions/cookieStorage.ts
 function createCookieSessionStorage({ cookie: cookieArg } = {}) {
-  let cookie = isCookie(cookieArg) ? cookieArg : createCookie(_optionalChain([cookieArg, 'optionalAccess', _18 => _18.name]) || "__session", cookieArg);
+  let cookie = isCookie(cookieArg) ? cookieArg : createCookie(cookieArg?.name || "__session", cookieArg);
   warnOnceAboutSigningSessionCookie(cookie);
   return {
     async getSession(cookieHeader, options) {
@@ -1756,7 +1660,7 @@ function href(path, ...args) {
     // same regex as in .\router\utils.ts: compilePath().
     (_, param, questionMark) => {
       const isRequired = questionMark === void 0;
-      const value = _optionalChain([params, 'optionalAccess', _19 => _19[param]]);
+      const value = params?.[param];
       if (isRequired && value === void 0) {
         throw new Error(
           `Path '${path}' requires param '${param}' but it was not provided`
@@ -1766,7 +1670,7 @@ function href(path, ...args) {
     }
   );
   if (path.endsWith("*")) {
-    const value = _optionalChain([params, 'optionalAccess', _20 => _20["*"]]);
+    const value = params?.["*"];
     if (value !== void 0) {
       result += "/" + value;
     }
@@ -1785,7 +1689,7 @@ function trimTrailingSplat(path) {
 }
 
 // lib/rsc/server.ssr.tsx
-
+import * as React4 from "react";
 
 // lib/rsc/html-stream/server.ts
 var encoder2 = new TextEncoder();
@@ -1875,9 +1779,139 @@ function escapeScript(script) {
   return script.replace(/<!--/g, "<\\!--").replace(/<\/(script)/gi, "</\\$1");
 }
 
+// lib/rsc/errorBoundaries.tsx
+import React3 from "react";
+var RSCRouterGlobalErrorBoundary = class extends React3.Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null, location: props.location };
+  }
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  static getDerivedStateFromProps(props, state) {
+    if (state.location !== props.location) {
+      return { error: null, location: props.location };
+    }
+    return { error: state.error, location: state.location };
+  }
+  render() {
+    if (this.state.error) {
+      return /* @__PURE__ */ React3.createElement(
+        RSCDefaultRootErrorBoundaryImpl,
+        {
+          error: this.state.error,
+          renderAppShell: true
+        }
+      );
+    } else {
+      return this.props.children;
+    }
+  }
+};
+function ErrorWrapper({
+  renderAppShell,
+  title,
+  children
+}) {
+  if (!renderAppShell) {
+    return children;
+  }
+  return /* @__PURE__ */ React3.createElement("html", { lang: "en" }, /* @__PURE__ */ React3.createElement("head", null, /* @__PURE__ */ React3.createElement("meta", { charSet: "utf-8" }), /* @__PURE__ */ React3.createElement(
+    "meta",
+    {
+      name: "viewport",
+      content: "width=device-width,initial-scale=1,viewport-fit=cover"
+    }
+  ), /* @__PURE__ */ React3.createElement("title", null, title)), /* @__PURE__ */ React3.createElement("body", null, /* @__PURE__ */ React3.createElement("main", { style: { fontFamily: "system-ui, sans-serif", padding: "2rem" } }, children)));
+}
+function RSCDefaultRootErrorBoundaryImpl({
+  error,
+  renderAppShell
+}) {
+  console.error(error);
+  let heyDeveloper = /* @__PURE__ */ React3.createElement(
+    "script",
+    {
+      dangerouslySetInnerHTML: {
+        __html: `
+        console.log(
+          "\u{1F4BF} Hey developer \u{1F44B}. You can provide a way better UX than this when your app throws errors. Check out https://reactrouter.com/how-to/error-boundary for more information."
+        );
+      `
+      }
+    }
+  );
+  if (isRouteErrorResponse(error)) {
+    return /* @__PURE__ */ React3.createElement(
+      ErrorWrapper,
+      {
+        renderAppShell,
+        title: "Unhandled Thrown Response!"
+      },
+      /* @__PURE__ */ React3.createElement("h1", { style: { fontSize: "24px" } }, error.status, " ", error.statusText),
+      ENABLE_DEV_WARNINGS ? heyDeveloper : null
+    );
+  }
+  let errorInstance;
+  if (error instanceof Error) {
+    errorInstance = error;
+  } else {
+    let errorString = error == null ? "Unknown Error" : typeof error === "object" && "toString" in error ? error.toString() : JSON.stringify(error);
+    errorInstance = new Error(errorString);
+  }
+  return /* @__PURE__ */ React3.createElement(ErrorWrapper, { renderAppShell, title: "Application Error!" }, /* @__PURE__ */ React3.createElement("h1", { style: { fontSize: "24px" } }, "Application Error"), /* @__PURE__ */ React3.createElement(
+    "pre",
+    {
+      style: {
+        padding: "2rem",
+        background: "hsla(10, 50%, 50%, 0.1)",
+        color: "red",
+        overflow: "auto"
+      }
+    },
+    errorInstance.stack
+  ), heyDeveloper);
+}
+function RSCDefaultRootErrorBoundary({
+  hasRootLayout
+}) {
+  let error = useRouteError();
+  if (hasRootLayout === void 0) {
+    throw new Error("Missing 'hasRootLayout' prop");
+  }
+  return /* @__PURE__ */ React3.createElement(
+    RSCDefaultRootErrorBoundaryImpl,
+    {
+      renderAppShell: !hasRootLayout,
+      error
+    }
+  );
+}
+
+// lib/rsc/route-modules.ts
+function createRSCRouteModules(payload) {
+  const routeModules = {};
+  for (const match of payload.matches) {
+    populateRSCRouteModules(routeModules, match);
+  }
+  return routeModules;
+}
+function populateRSCRouteModules(routeModules, matches) {
+  matches = Array.isArray(matches) ? matches : [matches];
+  for (const match of matches) {
+    routeModules[match.id] = {
+      links: match.links,
+      meta: match.meta,
+      default: noopComponent
+    };
+  }
+}
+var noopComponent = () => null;
+
 // lib/rsc/server.ssr.tsx
 var REACT_USE = "use";
-var useImpl = React3[REACT_USE];
+var useImpl = React4[REACT_USE];
 function useSafe(promise) {
   if (useImpl) {
     return useImpl(promise);
@@ -1963,14 +1997,14 @@ async function routeRSCServerRequest({
     const payload = await createFromReadableStream(
       detectRedirectResponse.body
     );
-    if (serverResponse.status === _chunkRBZI3ZHDjs.SINGLE_FETCH_REDIRECT_STATUS && payload.type === "redirect") {
+    if (serverResponse.status === SINGLE_FETCH_REDIRECT_STATUS && payload.type === "redirect") {
       const headers2 = new Headers(serverResponse.headers);
       headers2.delete("Content-Encoding");
       headers2.delete("Content-Length");
       headers2.delete("Content-Type");
       headers2.delete("X-Remix-Response");
       headers2.set("Location", payload.location);
-      return new Response(_optionalChain([serverResponseB, 'optionalAccess', _21 => _21.body]) || "", {
+      return new Response(serverResponseB?.body || "", {
         headers: headers2,
         status: payload.status,
         statusText: serverResponse.statusText
@@ -1985,7 +2019,7 @@ async function routeRSCServerRequest({
         headers
       });
     }
-    if (!_optionalChain([serverResponseB, 'optionalAccess', _22 => _22.body])) {
+    if (!serverResponseB?.body) {
       throw new Error("Failed to clone server response");
     }
     const body2 = html.pipeThrough(injectRSCPayload(serverResponseB.body));
@@ -1998,7 +2032,7 @@ async function routeRSCServerRequest({
       return reason;
     }
     try {
-      const status = _chunkRBZI3ZHDjs.isRouteErrorResponse.call(void 0, reason) ? reason.status : 500;
+      const status = isRouteErrorResponse(reason) ? reason.status : 500;
       const html = await renderHTML(() => {
         const decoded = Promise.resolve(
           createFromReadableStream(createStream())
@@ -2037,7 +2071,7 @@ async function routeRSCServerRequest({
           headers
         });
       }
-      if (!_optionalChain([serverResponseB, 'optionalAccess', _23 => _23.body])) {
+      if (!serverResponseB?.body) {
         throw new Error("Failed to clone server response");
       }
       const body2 = html.pipeThrough(injectRSCPayload(serverResponseB.body));
@@ -2045,7 +2079,7 @@ async function routeRSCServerRequest({
         status,
         headers
       });
-    } catch (e2) {
+    } catch {
     }
     throw reason;
   }
@@ -2064,7 +2098,7 @@ function RSCStaticRouter({ getPayload }) {
   if (payload.type !== "render") return null;
   let patchedLoaderData = { ...payload.loaderData };
   for (const match of payload.matches) {
-    if (_chunkRBZI3ZHDjs.shouldHydrateRouteLoader.call(void 0, 
+    if (shouldHydrateRouteLoader(
       match.id,
       match.clientLoader,
       match.hasLoader,
@@ -2075,7 +2109,7 @@ function RSCStaticRouter({ getPayload }) {
   }
   const context = {
     get _deepestRenderedBoundaryId() {
-      return _nullishCoalesce(decoded._deepestRenderedBoundaryId, () => ( null));
+      return decoded._deepestRenderedBoundaryId ?? null;
     },
     set _deepestRenderedBoundaryId(boundaryId) {
       decoded._deepestRenderedBoundaryId = boundaryId;
@@ -2104,7 +2138,7 @@ function RSCStaticRouter({ getPayload }) {
       }
     }))
   };
-  const router = _chunkHMTWJNYBjs.createStaticRouter.call(void 0, 
+  const router = createStaticRouter(
     payload.matches.reduceRight((previous, match) => {
       const route = {
         id: match.id,
@@ -2146,10 +2180,10 @@ function RSCStaticRouter({ getPayload }) {
       }
     },
     routeDiscovery: { mode: "lazy", manifestPath: "/__manifest" },
-    routeModules: _chunkFKYGG5Z2js.createRSCRouteModules.call(void 0, payload)
+    routeModules: createRSCRouteModules(payload)
   };
-  return /* @__PURE__ */ React3.createElement(_chunkRBZI3ZHDjs.RSCRouterContext.Provider, { value: true }, /* @__PURE__ */ React3.createElement(_chunkFKYGG5Z2js.RSCRouterGlobalErrorBoundary, { location: payload.location }, /* @__PURE__ */ React3.createElement(_chunkRBZI3ZHDjs.FrameworkContext.Provider, { value: frameworkContext }, /* @__PURE__ */ React3.createElement(
-    _chunkHMTWJNYBjs.StaticRouterProvider,
+  return /* @__PURE__ */ React4.createElement(RSCRouterContext.Provider, { value: true }, /* @__PURE__ */ React4.createElement(RSCRouterGlobalErrorBoundary, { location: payload.location }, /* @__PURE__ */ React4.createElement(FrameworkContext.Provider, { value: frameworkContext }, /* @__PURE__ */ React4.createElement(
+    StaticRouterProvider,
     {
       context,
       router,
@@ -2172,7 +2206,7 @@ function deserializeErrors(errors) {
   let serialized = {};
   for (let [key, val] of entries) {
     if (val && val.__type === "RouteErrorResponse") {
-      serialized[key] = new (0, _chunkRBZI3ZHDjs.ErrorResponseImpl)(
+      serialized[key] = new ErrorResponseImpl(
         val.status,
         val.statusText,
         val.data,
@@ -2202,131 +2236,58 @@ function deserializeErrors(errors) {
   return serialized;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-exports.Await = _chunkRBZI3ZHDjs.Await; exports.BrowserRouter = _chunkHMTWJNYBjs.BrowserRouter; exports.Form = _chunkHMTWJNYBjs.Form; exports.HashRouter = _chunkHMTWJNYBjs.HashRouter; exports.IDLE_BLOCKER = _chunkRBZI3ZHDjs.IDLE_BLOCKER; exports.IDLE_FETCHER = _chunkRBZI3ZHDjs.IDLE_FETCHER; exports.IDLE_NAVIGATION = _chunkRBZI3ZHDjs.IDLE_NAVIGATION; exports.Link = _chunkHMTWJNYBjs.Link; exports.Links = _chunkRBZI3ZHDjs.Links; exports.MemoryRouter = _chunkRBZI3ZHDjs.MemoryRouter; exports.Meta = _chunkRBZI3ZHDjs.Meta; exports.NavLink = _chunkHMTWJNYBjs.NavLink; exports.Navigate = _chunkRBZI3ZHDjs.Navigate; exports.NavigationType = _chunkRBZI3ZHDjs.Action; exports.Outlet = _chunkRBZI3ZHDjs.Outlet; exports.PrefetchPageLinks = _chunkRBZI3ZHDjs.PrefetchPageLinks; exports.Route = _chunkRBZI3ZHDjs.Route; exports.Router = _chunkRBZI3ZHDjs.Router; exports.RouterContextProvider = _chunkRBZI3ZHDjs.RouterContextProvider; exports.RouterProvider = _chunkRBZI3ZHDjs.RouterProvider; exports.Routes = _chunkRBZI3ZHDjs.Routes; exports.Scripts = _chunkRBZI3ZHDjs.Scripts; exports.ScrollRestoration = _chunkHMTWJNYBjs.ScrollRestoration; exports.ServerRouter = ServerRouter; exports.StaticRouter = _chunkHMTWJNYBjs.StaticRouter; exports.StaticRouterProvider = _chunkHMTWJNYBjs.StaticRouterProvider; exports.UNSAFE_AwaitContextProvider = _chunkRBZI3ZHDjs.AwaitContextProvider; exports.UNSAFE_DataRouterContext = _chunkRBZI3ZHDjs.DataRouterContext; exports.UNSAFE_DataRouterStateContext = _chunkRBZI3ZHDjs.DataRouterStateContext; exports.UNSAFE_ErrorResponseImpl = _chunkRBZI3ZHDjs.ErrorResponseImpl; exports.UNSAFE_FetchersContext = _chunkRBZI3ZHDjs.FetchersContext; exports.UNSAFE_FrameworkContext = _chunkRBZI3ZHDjs.FrameworkContext; exports.UNSAFE_LocationContext = _chunkRBZI3ZHDjs.LocationContext; exports.UNSAFE_NavigationContext = _chunkRBZI3ZHDjs.NavigationContext; exports.UNSAFE_RSCDefaultRootErrorBoundary = _chunkFKYGG5Z2js.RSCDefaultRootErrorBoundary; exports.UNSAFE_RemixErrorBoundary = _chunkRBZI3ZHDjs.RemixErrorBoundary; exports.UNSAFE_RouteContext = _chunkRBZI3ZHDjs.RouteContext; exports.UNSAFE_ServerMode = ServerMode; exports.UNSAFE_SingleFetchRedirectSymbol = _chunkRBZI3ZHDjs.SingleFetchRedirectSymbol; exports.UNSAFE_ViewTransitionContext = _chunkRBZI3ZHDjs.ViewTransitionContext; exports.UNSAFE_WithComponentProps = _chunkRBZI3ZHDjs.WithComponentProps; exports.UNSAFE_WithErrorBoundaryProps = _chunkRBZI3ZHDjs.WithErrorBoundaryProps; exports.UNSAFE_WithHydrateFallbackProps = _chunkRBZI3ZHDjs.WithHydrateFallbackProps; exports.UNSAFE_createBrowserHistory = _chunkRBZI3ZHDjs.createBrowserHistory; exports.UNSAFE_createClientRoutes = _chunkRBZI3ZHDjs.createClientRoutes; exports.UNSAFE_createClientRoutesWithHMRRevalidationOptOut = _chunkRBZI3ZHDjs.createClientRoutesWithHMRRevalidationOptOut; exports.UNSAFE_createRouter = _chunkRBZI3ZHDjs.createRouter; exports.UNSAFE_decodeViaTurboStream = _chunkRBZI3ZHDjs.decodeViaTurboStream; exports.UNSAFE_deserializeErrors = deserializeErrors; exports.UNSAFE_getHydrationData = _chunkFKYGG5Z2js.getHydrationData; exports.UNSAFE_getPatchRoutesOnNavigationFunction = _chunkRBZI3ZHDjs.getPatchRoutesOnNavigationFunction; exports.UNSAFE_getTurboStreamSingleFetchDataStrategy = _chunkRBZI3ZHDjs.getTurboStreamSingleFetchDataStrategy; exports.UNSAFE_hydrationRouteProperties = _chunkRBZI3ZHDjs.hydrationRouteProperties; exports.UNSAFE_invariant = _chunkRBZI3ZHDjs.invariant; exports.UNSAFE_mapRouteProperties = _chunkRBZI3ZHDjs.mapRouteProperties; exports.UNSAFE_shouldHydrateRouteLoader = _chunkRBZI3ZHDjs.shouldHydrateRouteLoader; exports.UNSAFE_useFogOFWarDiscovery = _chunkRBZI3ZHDjs.useFogOFWarDiscovery; exports.UNSAFE_useScrollRestoration = _chunkHMTWJNYBjs.useScrollRestoration; exports.UNSAFE_withComponentProps = _chunkRBZI3ZHDjs.withComponentProps; exports.UNSAFE_withErrorBoundaryProps = _chunkRBZI3ZHDjs.withErrorBoundaryProps; exports.UNSAFE_withHydrateFallbackProps = _chunkRBZI3ZHDjs.withHydrateFallbackProps; exports.createBrowserRouter = _chunkHMTWJNYBjs.createBrowserRouter; exports.createContext = _chunkRBZI3ZHDjs.createContext; exports.createCookie = createCookie; exports.createCookieSessionStorage = createCookieSessionStorage; exports.createHashRouter = _chunkHMTWJNYBjs.createHashRouter; exports.createMemoryRouter = _chunkRBZI3ZHDjs.createMemoryRouter; exports.createMemorySessionStorage = createMemorySessionStorage; exports.createPath = _chunkRBZI3ZHDjs.createPath; exports.createRequestHandler = createRequestHandler; exports.createRoutesFromChildren = _chunkRBZI3ZHDjs.createRoutesFromChildren; exports.createRoutesFromElements = _chunkRBZI3ZHDjs.createRoutesFromElements; exports.createRoutesStub = createRoutesStub; exports.createSearchParams = _chunkHMTWJNYBjs.createSearchParams; exports.createSession = createSession; exports.createSessionStorage = createSessionStorage; exports.createStaticHandler = _chunkHMTWJNYBjs.createStaticHandler; exports.createStaticRouter = _chunkHMTWJNYBjs.createStaticRouter; exports.data = _chunkRBZI3ZHDjs.data; exports.generatePath = _chunkRBZI3ZHDjs.generatePath; exports.href = href; exports.isCookie = isCookie; exports.isRouteErrorResponse = _chunkRBZI3ZHDjs.isRouteErrorResponse; exports.isSession = isSession; exports.matchPath = _chunkRBZI3ZHDjs.matchPath; exports.matchRoutes = _chunkRBZI3ZHDjs.matchRoutes; exports.parsePath = _chunkRBZI3ZHDjs.parsePath; exports.redirect = _chunkRBZI3ZHDjs.redirect; exports.redirectDocument = _chunkRBZI3ZHDjs.redirectDocument; exports.renderMatches = _chunkRBZI3ZHDjs.renderMatches; exports.replace = _chunkRBZI3ZHDjs.replace; exports.resolvePath = _chunkRBZI3ZHDjs.resolvePath; exports.unstable_HistoryRouter = _chunkHMTWJNYBjs.HistoryRouter; exports.unstable_RSCStaticRouter = RSCStaticRouter; exports.unstable_routeRSCServerRequest = routeRSCServerRequest; exports.unstable_setDevServerHooks = setDevServerHooks; exports.unstable_usePrompt = _chunkHMTWJNYBjs.usePrompt; exports.unstable_useRoute = _chunkRBZI3ZHDjs.useRoute; exports.useActionData = _chunkRBZI3ZHDjs.useActionData; exports.useAsyncError = _chunkRBZI3ZHDjs.useAsyncError; exports.useAsyncValue = _chunkRBZI3ZHDjs.useAsyncValue; exports.useBeforeUnload = _chunkHMTWJNYBjs.useBeforeUnload; exports.useBlocker = _chunkRBZI3ZHDjs.useBlocker; exports.useFetcher = _chunkHMTWJNYBjs.useFetcher; exports.useFetchers = _chunkHMTWJNYBjs.useFetchers; exports.useFormAction = _chunkHMTWJNYBjs.useFormAction; exports.useHref = _chunkRBZI3ZHDjs.useHref; exports.useInRouterContext = _chunkRBZI3ZHDjs.useInRouterContext; exports.useLinkClickHandler = _chunkHMTWJNYBjs.useLinkClickHandler; exports.useLoaderData = _chunkRBZI3ZHDjs.useLoaderData; exports.useLocation = _chunkRBZI3ZHDjs.useLocation; exports.useMatch = _chunkRBZI3ZHDjs.useMatch; exports.useMatches = _chunkRBZI3ZHDjs.useMatches; exports.useNavigate = _chunkRBZI3ZHDjs.useNavigate; exports.useNavigation = _chunkRBZI3ZHDjs.useNavigation; exports.useNavigationType = _chunkRBZI3ZHDjs.useNavigationType; exports.useOutlet = _chunkRBZI3ZHDjs.useOutlet; exports.useOutletContext = _chunkRBZI3ZHDjs.useOutletContext; exports.useParams = _chunkRBZI3ZHDjs.useParams; exports.useResolvedPath = _chunkRBZI3ZHDjs.useResolvedPath; exports.useRevalidator = _chunkRBZI3ZHDjs.useRevalidator; exports.useRouteError = _chunkRBZI3ZHDjs.useRouteError; exports.useRouteLoaderData = _chunkRBZI3ZHDjs.useRouteLoaderData; exports.useRoutes = _chunkRBZI3ZHDjs.useRoutes; exports.useSearchParams = _chunkHMTWJNYBjs.useSearchParams; exports.useSubmit = _chunkHMTWJNYBjs.useSubmit; exports.useViewTransitionState = _chunkHMTWJNYBjs.useViewTransitionState;
+// lib/dom/ssr/hydration.tsx
+function getHydrationData({
+  state,
+  routes,
+  getRouteInfo,
+  location,
+  basename,
+  isSpaMode
+}) {
+  let hydrationData = {
+    ...state,
+    loaderData: { ...state.loaderData }
+  };
+  let initialMatches = matchRoutes(routes, location, basename);
+  if (initialMatches) {
+    for (let match of initialMatches) {
+      let routeId = match.route.id;
+      let routeInfo = getRouteInfo(routeId);
+      if (shouldHydrateRouteLoader(
+        routeId,
+        routeInfo.clientLoader,
+        routeInfo.hasLoader,
+        isSpaMode
+      ) && (routeInfo.hasHydrateFallback || !routeInfo.hasLoader)) {
+        delete hydrationData.loaderData[routeId];
+      } else if (!routeInfo.hasLoader) {
+        hydrationData.loaderData[routeId] = null;
+      }
+    }
+  }
+  return hydrationData;
+}
+
+export {
+  ServerRouter,
+  createRoutesStub,
+  createCookie,
+  isCookie,
+  ServerMode,
+  setDevServerHooks,
+  createRequestHandler,
+  createSession,
+  isSession,
+  createSessionStorage,
+  createCookieSessionStorage,
+  createMemorySessionStorage,
+  href,
+  RSCRouterGlobalErrorBoundary,
+  RSCDefaultRootErrorBoundary,
+  populateRSCRouteModules,
+  routeRSCServerRequest,
+  RSCStaticRouter,
+  deserializeErrors,
+  getHydrationData
+};

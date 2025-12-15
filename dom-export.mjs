@@ -14,7 +14,7 @@ import {
   deserializeErrors,
   getHydrationData,
   populateRSCRouteModules
-} from "./chunk-TDCOAFPJ.mjs";
+} from "./chunk-PMGK554W.mjs";
 import {
   CRITICAL_CSS_DATA_ATTRIBUTE,
   ErrorResponseImpl,
@@ -42,7 +42,7 @@ import {
   singleFetchUrl,
   stripIndexParam,
   useFogOFWarDiscovery
-} from "./chunk-ANIOYBQK.mjs";
+} from "./chunk-WWGJGFF6.mjs";
 
 // lib/dom-export/dom-router-provider.tsx
 import * as React from "react";

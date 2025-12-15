@@ -13,7 +13,7 @@
 
 
 
-var _chunkYO5R3LGQjs = require('./chunk-YO5R3LGQ.js');
+var _chunkFKYGG5Z2js = require('./chunk-FKYGG5Z2.js');
 
 
 
@@ -32,7 +32,7 @@ var _chunkYO5R3LGQjs = require('./chunk-YO5R3LGQ.js');
 
 
 
-var _chunkUQPBOMFPjs = require('./chunk-UQPBOMFP.js');
+var _chunkRBZI3ZHDjs = require('./chunk-RBZI3ZHD.js');
 
 // lib/dom-export/dom-router-provider.tsx
 var _react = require('react'); var React = _interopRequireWildcard(_react); var React2 = _interopRequireWildcard(_react); var React3 = _interopRequireWildcard(_react);
@@ -204,7 +204,7 @@ function HydratedRouter(props) {
   }, []);
   React2.useEffect(() => {
     if (process.env.NODE_ENV === "development" && criticalCss === void 0) {
-      document.querySelectorAll(`[${_chunkUQPBOMFPjs.CRITICAL_CSS_DATA_ATTRIBUTE}]`).forEach((element) => element.remove());
+      document.querySelectorAll(`[${_chunkRBZI3ZHDjs.CRITICAL_CSS_DATA_ATTRIBUTE}]`).forEach((element) => element.remove());
     }
   }, [criticalCss]);
   let [location2, setLocation] = React2.useState(router.state.location);
@@ -376,10 +376,10 @@ function createRouterFromPayload({
     };
   if (payload.type !== "render") throw new Error("Invalid payload type");
   globalVar.__reactRouterRouteModules = _nullishCoalesce(globalVar.__reactRouterRouteModules, () => ( {}));
-  _chunkYO5R3LGQjs.populateRSCRouteModules.call(void 0, globalVar.__reactRouterRouteModules, payload.matches);
+  _chunkFKYGG5Z2js.populateRSCRouteModules.call(void 0, globalVar.__reactRouterRouteModules, payload.matches);
   let patches = /* @__PURE__ */ new Map();
   _optionalChain([payload, 'access', _22 => _22.patches, 'optionalAccess', _23 => _23.forEach, 'call', _24 => _24((patch) => {
-    _chunkUQPBOMFPjs.invariant.call(void 0, patch.parentId, "Invalid patch parentId");
+    _chunkRBZI3ZHDjs.invariant.call(void 0, patch.parentId, "Invalid patch parentId");
     if (!patches.has(patch.parentId)) {
       patches.set(patch.parentId, []);
     }
@@ -401,12 +401,12 @@ function createRouterFromPayload({
     }
     return [route];
   }, []);
-  globalVar.__reactRouterDataRouter = _chunkUQPBOMFPjs.createRouter.call(void 0, {
+  globalVar.__reactRouterDataRouter = _chunkRBZI3ZHDjs.createRouter.call(void 0, {
     routes,
     getContext,
     basename: payload.basename,
-    history: _chunkUQPBOMFPjs.createBrowserHistory.call(void 0, ),
-    hydrationData: _chunkYO5R3LGQjs.getHydrationData.call(void 0, {
+    history: _chunkRBZI3ZHDjs.createBrowserHistory.call(void 0, ),
+    hydrationData: _chunkFKYGG5Z2js.getHydrationData.call(void 0, {
       state: {
         loaderData: payload.loaderData,
         actionData: payload.actionData,
@@ -415,7 +415,7 @@ function createRouterFromPayload({
       routes,
       getRouteInfo: (routeId) => {
         let match = payload.matches.find((m) => m.id === routeId);
-        _chunkUQPBOMFPjs.invariant.call(void 0, match, "Route not found in payload");
+        _chunkRBZI3ZHDjs.invariant.call(void 0, match, "Route not found in payload");
         return {
           clientLoader: match.clientLoader,
           hasLoader: match.hasLoader,
@@ -513,9 +513,9 @@ function createRouterFromPayload({
     routeModules: globalVar.__reactRouterRouteModules
   };
 }
-var renderedRoutesContext = _chunkUQPBOMFPjs.createContext.call(void 0, );
+var renderedRoutesContext = _chunkRBZI3ZHDjs.createContext.call(void 0, );
 function getRSCSingleFetchDataStrategy(getRouter, ssr, basename, createFromReadableStream, fetchImplementation) {
-  let dataStrategy = _chunkUQPBOMFPjs.getSingleFetchDataStrategyImpl.call(void 0, 
+  let dataStrategy = _chunkRBZI3ZHDjs.getSingleFetchDataStrategyImpl.call(void 0, 
     getRouter,
     (match) => {
       let M = match;
@@ -571,20 +571,20 @@ function getRSCSingleFetchDataStrategy(getRouter, ssr, basename, createFromReada
 function getFetchAndDecodeViaRSC(createFromReadableStream, fetchImplementation) {
   return async (args, basename, targetRoutes) => {
     let { request, context } = args;
-    let url = _chunkUQPBOMFPjs.singleFetchUrl.call(void 0, request.url, basename, "rsc");
+    let url = _chunkRBZI3ZHDjs.singleFetchUrl.call(void 0, request.url, basename, "rsc");
     if (request.method === "GET") {
-      url = _chunkUQPBOMFPjs.stripIndexParam.call(void 0, url);
+      url = _chunkRBZI3ZHDjs.stripIndexParam.call(void 0, url);
       if (targetRoutes) {
         url.searchParams.set("_routes", targetRoutes.join(","));
       }
     }
     let res = await fetchImplementation(
-      new Request(url, await _chunkUQPBOMFPjs.createRequestInit.call(void 0, request))
+      new Request(url, await _chunkRBZI3ZHDjs.createRequestInit.call(void 0, request))
     );
     if (res.status >= 400 && !res.headers.has("X-Remix-Response")) {
-      throw new (0, _chunkUQPBOMFPjs.ErrorResponseImpl)(res.status, res.statusText, await res.text());
+      throw new (0, _chunkRBZI3ZHDjs.ErrorResponseImpl)(res.status, res.statusText, await res.text());
     }
-    _chunkUQPBOMFPjs.invariant.call(void 0, res.body, "No response body to decode");
+    _chunkRBZI3ZHDjs.invariant.call(void 0, res.body, "No response body to decode");
     try {
       const payload = await createFromReadableStream(res.body, {
         temporaryReferences: void 0
@@ -608,7 +608,7 @@ function getFetchAndDecodeViaRSC(createFromReadableStream, fetchImplementation) 
       }
       context.get(renderedRoutesContext).push(...payload.matches);
       let results = { routes: {} };
-      const dataKey = _chunkUQPBOMFPjs.isMutationMethod.call(void 0, request.method) ? "actionData" : "loaderData";
+      const dataKey = _chunkRBZI3ZHDjs.isMutationMethod.call(void 0, request.method) ? "actionData" : "loaderData";
       for (let [routeId, data] of Object.entries(payload[dataKey] || {})) {
         results.routes[routeId] = { data };
       }
@@ -641,7 +641,7 @@ function RSCHydratedRouter({
     [createFromReadableStream, payload, fetchImplementation, getContext]
   );
   React3.useEffect(() => {
-    _chunkUQPBOMFPjs.setIsHydrated.call(void 0, );
+    _chunkRBZI3ZHDjs.setIsHydrated.call(void 0, );
   }, []);
   React3.useLayoutEffect(() => {
     const globalVar = window;
@@ -743,8 +743,8 @@ function RSCHydratedRouter({
     routeDiscovery: { mode: "lazy", manifestPath: "/__manifest" },
     routeModules
   };
-  return /* @__PURE__ */ React3.createElement(_chunkUQPBOMFPjs.RSCRouterContext.Provider, { value: true }, /* @__PURE__ */ React3.createElement(_chunkYO5R3LGQjs.RSCRouterGlobalErrorBoundary, { location: state.location }, /* @__PURE__ */ React3.createElement(_chunkUQPBOMFPjs.FrameworkContext.Provider, { value: frameworkContext }, /* @__PURE__ */ React3.createElement(
-    _chunkUQPBOMFPjs.RouterProvider,
+  return /* @__PURE__ */ React3.createElement(_chunkRBZI3ZHDjs.RSCRouterContext.Provider, { value: true }, /* @__PURE__ */ React3.createElement(_chunkFKYGG5Z2js.RSCRouterGlobalErrorBoundary, { location: state.location }, /* @__PURE__ */ React3.createElement(_chunkRBZI3ZHDjs.FrameworkContext.Provider, { value: frameworkContext }, /* @__PURE__ */ React3.createElement(
+    _chunkRBZI3ZHDjs.RouterProvider,
     {
       router: transitionEnabledRouter,
       flushSync: ReactDOM2.flushSync,
@@ -761,8 +761,8 @@ function createRouteFromServerManifest(match, payload) {
   // the server loader flow regardless of whether the client loader calls
   // `serverLoader` or not, otherwise we'll have nothing to render.
   match.hasComponent && !match.element;
-  _chunkUQPBOMFPjs.invariant.call(void 0, window.__reactRouterRouteModules);
-  _chunkYO5R3LGQjs.populateRSCRouteModules.call(void 0, window.__reactRouterRouteModules, match);
+  _chunkRBZI3ZHDjs.invariant.call(void 0, window.__reactRouterRouteModules);
+  _chunkFKYGG5Z2js.populateRSCRouteModules.call(void 0, window.__reactRouterRouteModules, match);
   let dataRoute = {
     id: match.id,
     element: match.element,
@@ -812,7 +812,7 @@ function createRouteFromServerManifest(match, payload) {
         return await callSingleFetch(singleFetch);
       }
     }) : match.hasAction ? (_, singleFetch) => callSingleFetch(singleFetch) : () => {
-      throw _chunkUQPBOMFPjs.noActionDefinedError.call(void 0, "action", match.id);
+      throw _chunkRBZI3ZHDjs.noActionDefinedError.call(void 0, "action", match.id);
     },
     path: match.path,
     shouldRevalidate: match.shouldRevalidate,
@@ -825,7 +825,7 @@ function createRouteFromServerManifest(match, payload) {
     hasShouldRevalidate: match.shouldRevalidate != null
   };
   if (typeof dataRoute.loader === "function") {
-    dataRoute.loader.hydrate = _chunkUQPBOMFPjs.shouldHydrateRouteLoader.call(void 0, 
+    dataRoute.loader.hydrate = _chunkRBZI3ZHDjs.shouldHydrateRouteLoader.call(void 0, 
       match.id,
       match.clientLoader,
       match.hasLoader,
@@ -835,7 +835,7 @@ function createRouteFromServerManifest(match, payload) {
   return dataRoute;
 }
 function callSingleFetch(singleFetch) {
-  _chunkUQPBOMFPjs.invariant.call(void 0, typeof singleFetch === "function", "Invalid singleFetch parameter");
+  _chunkRBZI3ZHDjs.invariant.call(void 0, typeof singleFetch === "function", "Invalid singleFetch parameter");
   return singleFetch();
 }
 function preventInvalidServerHandlerCall(type, routeId, hasHandler) {
@@ -843,7 +843,7 @@ function preventInvalidServerHandlerCall(type, routeId, hasHandler) {
     let fn = type === "action" ? "serverAction()" : "serverLoader()";
     let msg = `You are trying to call ${fn} on a route that does not have a server ${type} (routeId: "${routeId}")`;
     console.error(msg);
-    throw new (0, _chunkUQPBOMFPjs.ErrorResponseImpl)(400, "Bad Request", new Error(msg), true);
+    throw new (0, _chunkRBZI3ZHDjs.ErrorResponseImpl)(400, "Bad Request", new Error(msg), true);
   }
 }
 var nextPaths = /* @__PURE__ */ new Set();
